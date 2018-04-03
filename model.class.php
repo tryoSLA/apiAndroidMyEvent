@@ -64,7 +64,23 @@ class Modele
         return $resultats;
     }
 
+    public static function updateMesEvenements($particpation, $idUser, $idEvenement)
+    {
+        Modele:: connexion();
 
+        if ($particpation == "participe")
+        {
+            $tab = "'".Date("Y-m-d")."',$idUser , $idEvenement";
+            $requete = "INSERT INTO Inscrire VALUES (".$tab.");";
+            $select = Modele:: $pdo->prepare($requete);
+            $select->execute();
+        }elseif ($particpation == "non_participe"){
+            $where = " WHERE id_personne = ".$idUser." AND id_event = ".$idEvenement;
+            $requete = "DELETE FROM Inscrire ".$where.";";
+            $select = Modele:: $pdo->prepare($requete);
+            $select->execute();
+        }
+    }
 }
 
 ?>
