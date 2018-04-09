@@ -18,12 +18,10 @@ class Modele
         Modele:: connexion();
         $mdp = md5($mdp);
 
-        $requete = "SELECT count(*) as nb, pseudo, id_personne, role FROM utilisteur WHERE email =:email AND mdp = :mdp group by id_personne;";
-
+        $requete = "SELECT count(*) as nb, pseudo, id_personne, role FROM utilisateur WHERE email='".$email."' AND mot_de_passe='".$mdp."' group by id_personne;";
         $select = Modele:: $pdo->prepare($requete);
-        $donnes = array(":email" => $email, ":mdp" => $mdp);
 
-        $select->execute($donnes);
+        $select->execute();
 
         $res = $select->fetch();
 

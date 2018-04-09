@@ -1,6 +1,6 @@
 <?php
 
-require_once 'modele.class.php';
+require_once 'model.class.php';
 
 if (isset($_REQUEST['id_user'])) {
     $idUser = $_REQUEST['id_user'];

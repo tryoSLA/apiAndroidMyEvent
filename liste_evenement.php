@@ -2,9 +2,10 @@
 
 header('Content-Type: application/json');
 
-require_once 'modele.class.php';
+require_once 'model.class.php';
 
-$res = Modele:: listerevenements();
-echo json_encode($res);
+$res[] = array(Modele :: listerevenements());
 
+
+echo json_encode(array_values($res));
 ?>

@@ -2,7 +2,7 @@
 
 header('Content-Type: application/json');
 
-require_once 'modele.class.php';
+require_once 'model.class.php';
 
 if (isset($_REQUEST['email'])) {
     $email = $_REQUEST['email'];
