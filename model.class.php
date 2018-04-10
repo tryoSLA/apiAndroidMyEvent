@@ -19,6 +19,7 @@ class Modele
         $mdp = md5($mdp);
 
         $requete = "SELECT count(*) as nb, pseudo, id_personne, role FROM utilisateur WHERE email='".$email."' AND mot_de_passe='".$mdp."' group by id_personne;";
+        Modele::$pdo->query("SET NAMES UTF8");
         $select = Modele:: $pdo->prepare($requete);
 
         $select->execute();
@@ -33,7 +34,7 @@ class Modele
         Modele:: connexion();
 
         $requete = "SELECT * FROM evenement";
-
+        Modele::$pdo->query("SET NAMES UTF8");
         $select = Modele:: $pdo->prepare($requete);
         $select->execute();
         $resultats = $select->fetchAll();
@@ -44,6 +45,7 @@ class Modele
     {
         Modele:: connexion();
         $requete = "SELECT * FROM evenement WHERE id_event =:idEvenement;";
+        Modele::$pdo->query("SET NAMES UTF8");
         $select = Modele:: $pdo->prepare($requete);
         $donnes = array(":idEvenement" => $idEvenement);
         $select->execute($donnes);
@@ -55,6 +57,7 @@ class Modele
     {
         Modele:: connexion();
         $requete = "SELECT * FROM my_events WHERE id_personne =:idUser;";
+        Modele::$pdo->query("SET NAMES UTF8");
         $select = Modele:: $pdo->prepare($requete);
         $donnes = array(":idUser" => $idUser);
         $select->execute($donnes);
@@ -70,10 +73,12 @@ class Modele
         {
             $tab = "'".Date("Y-m-d")."',$idUser , $idEvenement";
             $requete = "INSERT INTO Inscrire VALUES (".$tab.");";
+            Modele::$pdo->query("SET NAMES UTF8");
             $select = Modele:: $pdo->prepare($requete);
             $select->execute();
         }elseif ($particpation == "non_participe"){
             $where = " WHERE id_personne = ".$idUser." AND id_event = ".$idEvenement;
+            Modele::$pdo->query("SET NAMES UTF8");
             $requete = "DELETE FROM Inscrire ".$where.";";
             $select = Modele:: $pdo->prepare($requete);
             $select->execute();
